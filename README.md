@@ -1,97 +1,191 @@
 # Fundamentos de Git
-Git es un sistema de control de versiones que te permite como desarrollador rastrear y gestionar cambios en tu proyecto de software.
+Git es un sistema de control de versiones distribuido que permite 
+rastrear y gestionar cambios en el código fuente durante el 
+desarrollo de software.
 
-> No uses Git con interfaces graficas de usuario (GUI), usalo solo por consola (CLI)                      - Paz Valderrama
+> *No uses Git con interfaces graficas de usuario (GUI), úsalo por 
+consola (CLI)*
+> - Paz Valderrama
 
 ## Los tres estados de Git
-### Committed (confirmado)
-Significa que los estados estan almacenados de manera segura en nuestra base de datos local.
+
+Para entender Git, es crucial conocer los tres estados principales 
+en los que puede encontrarse un archivo:
+
 ### Modified (modificado)
-Significa que hemos modificado el archivo pero todavia no lo hemos confirmado en nuestra base de datos.
+Significa que haz modificado el archivo, pero aún no has confirmado 
+los cambios en la base de datos de Git.
+
 ### Staged (preparado)
-Significa que hemos marcado un archivo modificado en su version actual para que vaya en nuestra proxima confirmacion (commit).
+Significa que haz marcado un archivo modificado en su version 
+actual para que se incluya en tu proxima confirmacion (commit).
 
-## Las tres secciones principales
-### Working Directory (Directorio de trabajo)
-Es una copia de una version del proyecto. **Estos archivos, se sacan de la base de datos comprimida en el Git Directory, y se colocan en disco para que lo podamos usar y modificar.**
-### Staging Area (Area de preparacion)
-**Es simplemente un archivo**, generalmente contenido en el Git Directory, que **almacena informacion acerca de lo que va a ir en nuestra proxima confirmacion.**
-### Git directory (Directorio de Git)
-**Almacena los metadatos y la base de datos de objetos para nuestro proyecto.** Es la parte mas importante de Git, y es lo que se copia cuando clonamos un repositorio desde otro ordenador.
+### Committed (confirmado)
+Significa que los cambios estan almacenados de forma segura en tu
+base de datos local de Git.
 
-## Relacion entre los tres estados y secciones de Git
-Si una versión concreta de un archivo está en el Git Directory, se considera confirmada (committed). Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al Staging Area, está preparada (staged). Y si ha sufrido cambios desde que se obtuvo del repositorio, pero no se ha preparado, está modificada (modified).
+## Las Tres Secciones Principales
+
+Estos estados se corresponden con tres secciones de trabajo en un 
+proyecto de Git:
+
+1.  **Working Directory (Directorio de Trabajo):** Es una copia 
+local de una versión del proyecto. Aquí es donde modificas los 
+archivos directamente.
+2.  **Staging Area (Área de Preparación):** Es un archivo, 
+comúnmente llamado "index" contenido en tu Git Directory, que 
+almacena la información sobre lo que incluirá tu próxima 
+confirmación. Es un borrador de tu próximo commit.
+3.  **Git Directory (Directorio `.git`):** Es donde Git almacena 
+los metadatos y la base de datos de objetos de tu proyecto. Es el 
+corazón de Git, y es lo que se copia cuando clonas un repositorio.
+
+### Relacion entre los tres estados y secciones de Git
+
+La relación es simple: modificas archivos en tu **Directorio de Trabajo**, los preparas (añades) al **Área de Preparación**, y finalmente los confirmas, lo que mueve la instantánea de los archivos del Área de Preparación a tu **Directorio de Git** de forma permanente.
 
 ---
+
 ## Configurando Git por primera vez
-- Lee y escribe especificamente en el archivo `/etc/gitconfig`. Valores para todos los usuarios del sistema.
+
+Antes de empezar a usar Git, debes configurar tu identidad.
+
+-   **Configuración de sistema** Lee y escribe especificamente en 
+el archivo `/etc/gitconfig`. Valores para todos los usuarios del 
+sistema.
 ~~~
-git config --system user.name "Jorgels"
-git config --system user.email "jorgehuarsaya@gmail.com"
+git config --system user.name "jorghee"
+git config --system user.email "jorgeehuarsaya@gmail.com"
 ~~~
-- Lee y escribe especificamente en el archivo `~/.gitconfig` o `~/.config/git/config`. Valores para tu usuario.
+
+-   **Configuración global** Lee y escribe especificamente en el 
+archivo `~/.gitconfig` o `~/.config/git/config`. Valores para tu usuario.
 ~~~
-git config --global user.name "Jorgels"
-git config --global user.email "jorgehuarsaya@gmail.com"
+git config --global user.name "jorghee"
+git config --global user.email "jorgeehuarsaya@gmail.com"
 ~~~
-- Lee y escribe especificamente en el archivo `config` (es decir `.git/config`). Es especifico del directorio actual (Repositorio actual).
+
+-   **Configuración especifica del repositorio** Lee y escribe 
+especificamente en el archivo `config` (es decir `.git/config`). Es 
+especifico del directorio actual (Repositorio actual).
 ~~~
-git config user.name "Jorgels"
-git config user.email "jorgehuarsaya@gmail.com"
+git config user.name "jorghee"
+git config user.email "jorgeehuarsaya@gmail.com"
 ~~~
-- Elige el editor de texto por defecto que se utilizara cuando Git necesite que introduzcas un mensaje.
+
+-   Elige el editor de texto por defecto que se utilizara cuando 
+Git necesite que introduzcas un mensaje.
 ~~~
 git config --global core.editor nvim
 ~~~
-- Muestra todas las propiedades que Git ha configurado
+
+-   Muestra todas las propiedades que Git ha configurado
 ~~~
 git config --list
 ~~~
 
-## Inicializando un repositorio en un directorio existente
-- Crea el esqueleto del archivo `.git` en el directorio actual. Ten en cuenta que aun no hay nada en el directorio que este bajo seguimiento.
+## Creando y Obteniendo Repositorios
+
+Puedes empezar a trabajar con Git de dos maneras principales: 
+inicializando un nuevo repositorio o clonando uno existente.
+
+### Inicializando un repositorio en un directorio existente
+
+Si ya tienes un proyecto y quieres empezar a controlarlo con Git.
+
+-   Crea el esqueleto del archivo `.git` en el directorio actual.
+Ten en cuenta que aún no hay nada que este bajo seguimiento en el 
+directorio.
 ~~~
 git init 
 ~~~
-- Comienza el seguimiento de los archivos dentro del directorio y hacer una primera confirmacion (commit).
+
+- Comienza el seguimiento de los archivos dentro del directorio y 
+luego realiza tu primer `commit` (confirmación).
 ~~~
 git add .
 git commit -m "Initial project version"
 ~~~
 
-El comando `add` cumple varios propositos, lo usamos para empezar a rastrear archivos nuevos como lo estamos viendo en este caso; tambien para preparar archivos, y hacer otras cosas como marcar archivos en conflicto por combinación como resueltos.
+El comando `add` tiene varios funcionalidades, por ejemplo, lo 
+usamos para empezar a **rastrear archivos nuevos** (como en este 
+caso); tambien para **preparar archivos** y **marcar archivos 
+en conflicto como resueltos**.
 
 ## Clonando un repositorio existente
-- El el siguiente ejemplo, **se obtiene una copia** de un repositorio Git existente. **crea** un directorio llamado `libgit2`, **inicializa** un directorio `.git` en su interior, **descarga** toda la información de ese repositorio y **saca una copia de trabajo** de la última versión. Tambien puedes especificar el nombre del directorio.
+
+Si quieres obtener una copia de un proyecto que ya existe en un servidor remoto (como GitHub).
+
+-   El siguiente comando, **obtiene una copia** de un repositorio 
+Git existente. **crea** un directorio llamado `libgit2`, 
+**inicializa** un directorio `.git` en su interior, **descarga** 
+toda la información del repositorio y **saca una copia de trabajo** 
+de la última versión. 
 ~~~
 git clone https://github.com/libgit2/libgit2
-git clone https://github.com/libgit2/libgit2 mylibgit
+git clone https://github.com/libgit2/libgit2 <local_name>
 ~~~
-Git te permite usar distintos protocolos  de transferencia. En esta ocasion se uso `http://`, pero tambien puedes utilizar `git://` o `usuario@servidor:ruta/del/repositorio.git` que utiliza el protocolo SSH.
 
-> Personalmente siento que esta funcionalidad no sigue la filosofia de "Hazlo tu mismo", mas adelante en la seccion "Añadir repositorios remotos" puede que entiendas el porque de este pensamiento. Es verdad que como programadores debemos automatizar las funcionalidades que nos hacen perder tiempo, sin embargo, eso no justifica no conocer el funcionamiento por dentro.
+> [!NOTE]
+> Git te permite usar distintos protocolos  de transferencia. En 
+> esta ocasion se uso `http://`, pero tambien puedes utilizar 
+> `git://` o `usuario@servidor:ruta/del/repositorio.git` que 
+> utiliza el protocolo SSH.
+
+### Comandos útiles
+
+| Command | Description |
+| -------------- | --------------- |
+| `git clone --recurse-submodules` | Clona un repositorio junto con todos sus *submódulos*, inicializándolos y descargando su contenido. |
+| `git clone --depth <number> <url>` | Clona un repositorio con un historial reducido (*shallow clone*) |
 
 ## Revisando el Estado de tus archivos
-- Muestra el estado actual de los archivos. Tambien puedes ejecutar el comando con el siguiente argumento para una salida abreviada.
+
+El comando más importante para saber qué está pasando en tu 
+repositorio.
+
 ~~~
 git status
-git status -s     # de --short
 ~~~
 
-## Ignorar archivos, el archivo .gitignore
-GitHub mantiene una extensa lista de archivos .gitignore adecuados a docenas de proyectos y lenguajes, en caso de que quieras tener un punto de partida para tu proyecto, te dejo el link al repositorio [GitHub gitignore](https://github.com/github/gitignore)
+### Comandos Útiles y Alias
 
-## Ver los cambios preparados y no preparados
-- Muestra lo que has cambiado pero aun no lo has preparado.
+| Comando Completo       | Descripción                                      |
+| :--------------------- | :----------------------------------------------- |
+| `git status`           | Muestra el estado completo del repositorio.      |
+| `git status -s`        | Muestra una salida breve y compacta del estado.  |
+| `git status -sb`       | Salida breve que también muestra la rama actual. |
+
+## Ignorar archivos: el archivo `.gitignore`
+
+GitHub mantiene una extensa lista de archivos
+[.gitignore templates](https://github.com/github/gitignore)
+adecuados a docenas de proyectos y lenguajes.
+
+## Ver los cambios (Staged y Unstaged)
+
+Para saber exactamente qué has modificado.
+
+-   Muestra los cambios en el directorio de trabajo que **aún no 
+han sido preparados** (unstaged).
 ~~~
-git diff <file>
+git diff <archivo>
 ~~~
 
-- Muestra lo que has preparado y sera incluido en la proxima confirmacion (commit)
+-   Muestra los cambios que **ya están preparados** (staged) y se 
+incluirán en el próximo commit.
 ~~~
-git diff --staged <file>
-git diff --cached <file>
+git diff --staged <archivo>   # --staged is an alias for --cached
 ~~~
+
+### Comandos útiles
+
+| Command                                | Description                                                                 |
+|----------------------------------------|-----------------------------------------------------------------------------|
+| `git diff --cached --word-diff`        | Igual que `--cached`, pero resalta las diferencias a nivel de palabras en lugar de líneas. |
+| `git diff-tree --no-commit-id --name-only -r <commit>` | Lista solo los nombres de archivos cambiados en un commit específico. |
+| `git diff @{upstream}`                 | Muestra las diferencias entre la rama local y su rama remota (*upstream*). |
+| `git diff --word-diff`                 | Muestra los cambios resaltando palabras modificadas en lugar de líneas completas. |
 
 ## Saltar el Staging Area
 - Prepara automaticamente todos los archivos rastreados antes de confirmarlos, ahorrandote el paso de `git add`.
