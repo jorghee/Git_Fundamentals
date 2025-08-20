@@ -188,14 +188,14 @@ Para saber exactamente qué has modificado.
 han sido preparados** (unstaged).
 
     ~~~
-    git diff <archivo>
+    git diff <file>
     ~~~
 
 -   Muestra los cambios que **ya están preparados** (staged) y se
 incluirán en el próximo commit.
 
     ~~~
-    git diff --staged <archivo>   # --staged is an alias for --cached
+    git diff --staged <file>   # --staged is an alias for --cached
     ~~~
 
 #### Useful commands
@@ -412,12 +412,139 @@ historia.
 Directory. Es útil para tener un espacio de trabajo limpio.
 
     ~~~
-    git clean -fd   # Elimina files (-f) y directories (-d) no rastreados
+    git clean -fd  # Delete files (-f) and directories (-d) untracked
     ~~~
 
 ---
 
-## 1.8. Trabajar con remotos
+## 1.8. Ramas (Branching): El superpoder de Git
+
+Una de las características más importantes de Git es su sistema de
+ramas. Una rama es esencialmente un puntero móvil y ligero a uno de
+tus commits.
+
+### 1.8.1. Creación, listado y cambio de ramas
+
+Las ramas te permiten divergir de la línea principal de desarrollo
+y continuar trabajando de forma aislada sin afectar esa línea principal.
+
+| Command                       | Description                                                     |
+|-------------------------------|-----------------------------------------------------------------|
+| `git branch`                  | Lista todas las ramas locales. La actual está marcada con `*`.    |
+| `git branch <nombre-rama>`    | Crea una nueva rama.                                            |
+| `git switch <nombre-rama>`    | Cambia a la rama especificada. Es el comando moderno y preferido. |
+| `git switch -c <nombre-rama>` | Crea una nueva rama y cambia a ella inmediatamente.             |
+| `git branch -d <nombre-rama>` | Elimina una rama que ya ha sido fusionada.                      |
+| `git branch -D <nombre-rama>` | Fuerza la eliminación de una rama, incluso si no ha sido fusionada. |
+| `git branch -a`               | Lista todas las ramas, tanto locales como remotas.              |
+
+### 1.8.2. Fusión de ramas (Merging)
+
+Una vez que has completado el trabajo en tu rama, puedes fusionar
+tus cambios de nuevo en la rama principal.
+
+~~~
+git switch main
+git merge <name-branch-to-merge>
+~~~
+
+![Ejemplo de `git merge`](./.github/git_merge.png)
+
+> [!IMPORTANT]
+> **Conflictos de fusión:** Si dos ramas modifican la misma parte
+> del mismo archivo, Git no podrá fusionarlas automáticamente y se
+> producirá un conflicto. Deberás resolver el conflicto manualmente
+> editando el archivo, guardándolo, y luego usando `git add` y
+> `git commit` para finalizar la fusión.
+
+## 1.9. Reorganizando el trabajo
+
+### 1.9.1. Rebase: La alternativa a la fusión
+
+Rebase es otra forma de integrar cambios de una rama a otra. En lugar
+de crear un commit de fusión, rebase **reaplica** los commits de tu
+rama, uno por uno, sobre la rama de destino. Esto resulta en un
+historial de proyecto más limpio y lineal.
+
+~~~
+git switch feature-branch
+git rebase main
+~~~
+
+![Ejemplo de `git rebase`](./.github/git_rebase.svg)
+
+> [!CAUTION]
+> Nunca hagas rebase en commits que ya has empujado a un repositorio
+> público y que otras personas pueden estar usando. Reescribir el
+> historial compartido puede causar serios problemas.
+
+#### Useful commands
+
+| Command                   | Description                                                   |
+|---------------------------|---------------------------------------------------------------|
+| `git rebase --abort`      | Cancela el rebase en curso y restaura el estado anterior.     |
+| `git rebase --continue`   | Continúa el rebase tras resolver conflictos manualmente.      |
+| `git rebase --skip`       | Omite el commit en conflicto y prosigue con el rebase.        |
+
+### 1.9.2. Rebase Interactivo
+
+Una herramienta increíblemente poderosa para reescribir, combinar,
+reordenar y eliminar commits antes de compartirlos.
+
+~~~
+git rebase -i HEAD~3   # Revisa y modifica los últimos 3 commits
+~~~
+
+### 1.9.3. Rebase Avanzado
+
+El rebase avanzado permite mover un rango específico de commits
+desde una rama y reaplicarlos sobre otra base diferente.
+Esto es útil cuando deseas **reubicar solo una parte de la
+historia** sin arrastrar commits innecesarios.
+
+~~~
+git rebase --onto <new-base> <upstream> <branch>
+~~~
+
+* `<new-base>`: Donde quieres “pegar” los commits.
+* `<upstream>`: Hasta dónde cortar de la historia.
+* `<branch>`: La rama que contiene los commits a mover.
+
+### 1.9.4. Cherry-pick
+
+Permite tomar un commit específico de una rama y aplicarlo sobre otra.
+
+~~~
+git cherry-pick <commit-hash>   # list of commits
+~~~
+
+#### Useful commands
+
+| Command                       | Description                                                                   |
+|-------------------------------|-------------------------------------------------------------------------------|
+| `git cherry-pick --abort`     | Cancela el proceso de cherry-pick en curso y revierte los cambios aplicados.  |
+| `git cherry-pick --continue`  | Reanuda un cherry-pick después de resolver conflictos manualmente.            |
+
+## 1.10. Guardado temporal de cambios (Stashing)
+
+A veces necesitas cambiar de rama, pero tienes trabajo a medio hacer
+que no quieres confirmar todavía. El comando `stash` toma tu estado
+de trabajo modificado, lo guarda en una pila de cambios sin terminar
+y te devuelve a un directorio de trabajo limpio.
+
+| Command                               | Description                                                               |
+|---------------------------------------|---------------------------------------------------------------------------|
+| `git stash push`                      | Guarda tus cambios locales no confirmados en el "stash".                  |
+| `git stash push --include-untracked`  | Guarda tus cambios locales junto con archivos no rastreados.              |
+| `git stash --all`                     | Guarda tus cambios locales incluyendo archivos ignorados y no rastreados. |
+| `git stash list`                      | Muestra la lista de todos los cambios guardados en el stash.              |
+| `git stash apply`                     | Aplica el último stash sin eliminarlo de la lista.                        |
+| `git stash pop`                       | Aplica el último stash y lo elimina de la lista.                          |
+| `git stash drop`                      | Elimina el último stash de la lista.                                      |
+| `git stash clear`                     | Elimina todos los stashes.                                                |
+| `git stash show --text`               | Muestra el contenido detallado del último stash en formato de texto.      |
+
+## 1.11. Trabajar con remotos
 
 -   Muestra los repositorios remotos configurados en tu maquina
 local. La opcion `-v` muestra las URLs.
@@ -427,75 +554,140 @@ local. La opcion `-v` muestra las URLs.
     git remote -v
     ~~~
 
-### 1.8.1. Añadir repositorios remotos 
+### 1.11.1. Añadir repositorios remotos 
 
 Añadir un repositorio remoto significa **establecer una conexion
-entre tu repositorio local y cualquier otro repositorio u
+entre tu repositorio local y cualquier otro repositorio o
 repositorios remotos.** 
 
 > [!IMPORTANT]
-> El comando `git clone` realiza muchas tareas por ti, lo
-> importante es que **hace automaticamente la relación entre el
-> repositorio remoto y tu repositorio local**. El repositorio
-> local que el comando lo crea automaticamente, por defecto, añade el
-> repositorio remoto con el nombre de `origin`, este nombre no es
-> mas que **una referencia** legible en lugar de la URL completa.
+> El comando `git clone` realiza muchas tareas por ti, una de ellas
+> es **realizar automáticamente la relación entre el repositorio
+> remoto y tu repositorio local**.
+>
+> El comando crea el repositorio local y  añade el repositorio
+> remoto con el nombre de `origin` por defecto. Este nombre no es
+> más que **una referencia** legible en lugar de la URL completa.
 
 > [!NOTE]
-> Cuando inicializas un seguimiento, git crea automaticamente la
-> rama `master` donde se almacena todo tu proyecto. Solo cuando
-> realizas tu primer commit, git realiza esta acción.
+> Cuando inicializas un repositorio, [Git](https://git-scm.com/)
+> crea por defecto la rama `master`, pero esta solo toma forma
+> cuando realizas el primer commit.
 
 > [!WARNING]
-> No pienses erroneamente que solo puedes tener una rama local para
-> seguir un único repositorio remoto. En un repositorio local puedes
-> tener referencias a varios servidores (repositorios remotos). 
+> No creas que solo puedes tener una rama local para conectada a un
+> único repositorio remoto. Un repositorio local puede referenciar a
+> varios servidores (repositorios remotos). 
 
-> *Los repositorios remotos son solo referencias en los repositorios locales.*
+> *Un repositorio remoto no es más que una referencia guardada en 
+tu repositorio local.*
 
 ---
 
 -   Añade un nuevo remoto con un nombre corto que puedas
 referenciar fácilmente.
+
     ~~~
-    git remote add [short-name] [url]
+    git remote add <remote-name> <url>
     ~~~
+
     > Por convención, el repositorio original del que clonaste se
     llama `origin`.
 
 > [!IMPORTANT]
-> El `short-name` no necesariamente debe ser igual al nombre del
-> repositorio remoto. Si entendiste el concepto de referencias, me 
-> responderas que efectivamente no debe ser igual porque ea solo
-> una referencia para que simplifique manipular el repositorio.
+> El `remote-name` no tiene que coincidir con el nombre del
+> repositorio remoto. Si ya entendiste el concepto de referencias,
+> seguramente ya pensaste responder que efectivamente no debe ser 
+> igual porque es solo un `alias` para simplificar las operaciones
+> con el repositorio.
 
-### 1.8.2. Traer y combinar remotos
-Ya tienes la referencia, ahora puedes realizar operaciones usando esta referencia.
-- Trae toda la informacion que aun no tienes del repositorio remoto. Luego de hacer esto, tendrás referencias a todas las ramas del remoto, las cuales puedes combinar e inspeccionar cuando quieras.
-~~~
-git fetch [remote-name]
-~~~
-> Es importante destacar que el comando solo trae datos a tu repositorio local, ni lo combina automaticamente con tu trabajo ni modifica el trabajo que llevas hecho. La combinación con tu trabajo debes hacerla manualmente, creando y configurando ramas locales para que rastreen ramas remotas especificas y finalmente ejecutando el comando `git pull`. Si relacionas esto con lo aprendido te daras cuenta que desde ahora todo es igual.
+### 1.11.2. Traer, combinar y enviar a remotos
 
-### 1.8.3. Enviar a tus remotos
-- Envia la informacion de una rama local al servidor (repositorio remoto) que este referenciado en el repositorio local.
-~~~
-git push [remote-name] [branch-name]
-~~~
-> Si has configurado que una rama local siga a una rama remota especifica, no es necesario realizar esta especificacion, basta con `git push`. De hecho, cuando clonamos un repositorio, git hace automaticamente esta configuracion, por ello solo ejecutamos comandos como `git pull` y `git push`
+-   `fetch`: Trae toda la información que aún no tienes del
+    repositorio remoto. **Solo descarga los datos**; no los
+    fusiona con tu trabajo.
 
-### 1.8.4. Inspeccionar un remoto
-- Muestra informacion acerca de un remoto en particular.
-~~~
-git remote show [remote-name]
-~~~
+    ~~~
+    git fetch <remote-name>
+    ~~~
 
-### 1.8.5. Eliminar y renombrar remotos
-- Renombra y/o elimina el repositorio remoto respectivamente.
-~~~
-git remote rename [back-name] [new-name]
-git remote rm [remote-name]
-~~~
+    > [!IMPORTANT]
+    > La fusión con tu trabajo debes ser manual, creando y
+    > configurando ramas locales para que rastreen ramas remotas
+    > específicas.
+
+-   `pull`: Es esencialmente un `git fetch` seguido de un
+    `git merge`. Trae los cambios del remoto y los fusiona
+    inmediatamente en tu rama local actual.
+
+    ~~~
+    git pull <remote-name> <branch-name>
+    ~~~
+
+-   `push`: Envia los commits de tu rama local al repositorio remoto.
+
+    ~~~
+    git push <remote-name> <branch-name>
+    ~~~
+
+> [!NOTE]
+> Si una rama local está configurada para seguir a una rama remota,
+> no es necesario especar nada al hacer `git push` o `git pull`.
+> De hecho, al clonar un repositorio, Git realiza esta
+> configuración automáticamente, por eso normalmente basta con
+> usar los comandos sin argumentos.
+
+#### Useful commands
+
+| Command                       | Description                                                                                               |
+|-------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `git fetch --all`             | Descarga actualizaciones de todos los remotos configurados.                                               |
+| `git fetch --prune`           | Elimina referencias a ramas remotas que ya no existen en el servidor.                                     |
+| `git fetch --jobs=10`         | Ejecuta hasta 10 tareas de `fetch` en paralelo para mayor velocidad.                                      |
+| `git pull --rebase`           | Realiza un `fetch` y luego un `rebase` en lugar de un `merge`. Mantiene un historial lineal.              |
+| `git pull --autostash`        | Guarda temporalmente cambios sin commitear (`stash`), realiza el `pull` y luego los restaura.             |
+| `git push -u origin <branch>` | Empuja la rama al remoto y la configura para que se rastreen mutuamente (`-u` es `--set-upstream`).       |
+| `git push --force-with-lease` | Fuerza un push solo si la rama remota no ha sido actualizada por otra persona. Más seguro que `--force`.  |
+| `git push --dry-run`          | Simula un `push` mostrando qué cambios se enviarían, sin subir nada al remoto.                            |
+
+### 1.11.4. Inspeccionar y gestionar remotos
+
+-   Muestra informacion detallada sobre un remoto en particular.
+
+    ~~~
+    git remote show <remote-name>
+    ~~~
+
+-   Renombra y elimina un repositorio remoto, respectivamente.
+
+    ~~~
+    git remote rename <back-name> <new-name>
+    git remote rm <remote-name>
+    ~~~
+
+#### Useful commands
+
+| Command                | Description                                                                                                  |
+|------------------------|--------------------------------------------------------------------------------------------------------------|
+| `git remote update`    | Descarga actualizaciones de todos los remotos y sus ramas, pero sin fusionarlas ni modificarlas localmente.  |
+| `git remote set-url`   | Cambia la URL asociada a un remoto existente (ej. pasar de HTTPS a SSH).                                     |
+
+## 1.12. Etiquetado (Tagging)
+
+Git puede etiquetar puntos específicos en el historial como
+importantes. Típicamente, la gente usa esta funcionalidad para
+marcar puntos de lanzamiento.
+
+| Command                           | Description                                                                   |
+|-----------------------------------|-------------------------------------------------------------------------------|
+| `git tag`                         | Lista todas las etiquetas existentes.                                         |
+| `git tag -s`                      | Crea un tag firmada con tu clave GPG, para autenticidad de la versión marcada.|
+| `git tag -l "v1.8.5*"`            | Lista tags que coinciden con un patrón.                                       |
+| `git tag -a v1.4 -m "version 1.4"`| Crea un tag "anotada", que se almacena como un objeto completo en Git.        |
+| `git tag v1.4-lw`                 | Crea un tag "ligera", que es solo un puntero a un commit.                     |
+| `git push origin --tags`          | Empuja todas tus etiquetas al servidor remoto.                                |
+
+---
 
 # Questions and research
 
