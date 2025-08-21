@@ -6,7 +6,7 @@ desarrollo de software.
 
 > No uses Git con interfaces graficas de usuario (GUI), úsalo por
 consola (CLI)
-> <samp> *~ Paz Valderrama*</samp>
+> <samp> ~ Paz Valderrama</samp>
 
 ## 1.1. Los tres estados de Git
 
@@ -170,7 +170,6 @@ git status
 
 | Command       | Description                                      |
 | :--------------------- | :----------------------------------------------- |
-| `git status`           | Muestra el estado completo del repositorio.      |
 | `git status -s`        | Muestra una salida breve y compacta del estado.  |
 | `git status -sb`       | Salida breve que también muestra la rama actual. |
 
@@ -388,6 +387,77 @@ trabajo desde el último commit.
     ~~~
 
 ### 1.7.3. Deshacer commits
+
+#### Los 3 árboles
+Una manera más fácil de pensar sobre `reset` y `checkout` es
+comprender a Git como un administrador de contenido de tres
+árboles diferentes.
+
+> [!IMPORTANT]
+> Por “árbol”, aquí realmente queremos decir “colección de
+> archivos”, no específicamente la estructura de
+> datos. (Hay algunos casos donde el índice no funciona
+> exactamente como un árbol, pero
+> para nuestros propósitos es más fácil pensarlo de esta
+> manera por ahora)
+
+1. **HEAD** Es el puntero a la referencia de bifurcación
+    actual, que es, a su vez, un puntero al último commit
+    realizado en esa rama. Eso significa que HEAD será el
+    padre del próximo commit que se cree. 
+
+> [!IMPORTANT]
+> En general, es más simple pensar en HEAD como un
+> snapshot completo del proyecto en tu último commit.
+
+> [!NOTE]
+> Es bastante fácil ver cómo es el aspecto de ese snapshot
+> (instantánea). Aquí hay un ejemplo de cómo obtener la **lista del
+> directorio real** y **las sumas de comprobación SHA-256
+> para cada archivo** en la instantánea de HEAD.
+
+~~~
+$ git cat-file -p HEAD
+tree cfda3bf379e4f8dba8717dee55aab78aef7f4daf
+author Scott Chacon 1301511835 -0700
+committer Scott Chacon 1301511835 -0700
+
+commit inicial
+
+$ git ls-tree -r HEAD
+100644 blob a906cb2a4a904a152... README
+100644 blob 8f94139338f9404f2... Rakefile
+040000 tree 99f1a6d12cb4b6f19... lib
+~~~
+
+2. **Índice** Es tu **siguiente commit propuesto**. También nos
+    hemos estado refiriendo a este concepto como el "Área de
+    Preparación" de Git ya que esto es lo que Git ve cuando
+    ejecutas `git commit`.
+
+> [!IMPORTANT]
+> Git rellena este índice con una lista de los archivos tal como
+> se veían la última vez que fueron extraídos (checkout) a tu
+> directorio de trabajo. Luego, reemplaza algunos de esos archivos
+> con nuevas versiones de ellos, y `git commit` los convierte en
+> el árbol para un nuevo commit.
+
+> [!CAUTION]
+> El índice no es técnicamente una estructura de árbol, en realidad
+> se implementa como un manifiesto aplanado, pero para nuestros
+> propósitos, está lo suficientemente cerca.
+
+~~~
+$ git ls-files -s
+100644 a906cb2a4a904a152e80877d4088654daad0c859 0 README
+100644 8f94139338f9404f26296befa88755fc2598c289 0 Rakefile
+100644 47c6340d6459e05787f644c2447d2595f5d3a54b 0 lib/simplegit.rb
+~~~
+
+3. **Working Directory** Descomprime los objetos del directorio `.git`
+    para tratarlos como archivos reales listos para ser editados.
+
+#### Useful commands
 
 -   **`git reset`**: Mueve el puntero `HEAD` a un commit anterior,
 afectando potencialmente el **Staging Area** y el **Working
@@ -611,10 +681,10 @@ referenciar fácilmente.
     git fetch <remote-name>
     ~~~
 
-    > [!IMPORTANT]
-    > La fusión con tu trabajo debes ser manual, creando y
-    > configurando ramas locales para que rastreen ramas remotas
-    > específicas.
+> [!IMPORTANT]
+> La fusión con tu trabajo debes ser manual, creando y
+> configurando ramas locales para que rastreen ramas remotas
+> específicas.
 
 -   `pull`: Es esencialmente un `git fetch` seguido de un
     `git merge`. Trae los cambios del remoto y los fusiona
