@@ -1,7 +1,7 @@
 # 1. Git Fundamentals
 
-Git es un sistema de control de versiones distribuido que permite 
-rastrear y gestionar cambios en el código fuente durante el 
+Git es un sistema de control de versiones distribuido que permite
+rastrear y gestionar cambios en el código fuente durante el
 desarrollo de software.
 
 > No uses Git con interfaces graficas de usuario (GUI), úsalo por
@@ -10,17 +10,17 @@ consola (CLI)
 
 ## 1.1. Los tres estados de Git
 
-Para entender Git, es crucial conocer los tres estados principales 
+Para entender Git, es crucial conocer los tres estados principales
 en los que puede encontrarse un archivo:
 
 1.  **Modified (Modificado):** Significa que haz modificado el
-archivo, pero aún no has confirmado los cambios en la base de
-datos de Git.
+    archivo, pero aún no has confirmado los cambios en la base de
+    datos de Git.
 2.  **Staged (Preparado):** Significa que haz marcado un archivo
-modificado en su version actual para que se incluya en tu proxima
-confirmacion (commit).
+    modificado en su versión actual para que se incluya en tu próxima
+    confirmación (commit).
 3.  **Committed (Confirmado):** Significa que los cambios estan
-almacenados de forma segura en tu base de datos local de Git.
+    almacenados de forma segura en tu base de datos local de Git.
 
 ## 1.2. Las Tres Secciones Principales
 
@@ -28,15 +28,15 @@ Estos estados se corresponden con tres secciones de trabajo en un
 proyecto de Git:
 
 1.  **Working Directory (Directorio de Trabajo):** Es una copia
-local de una versión del proyecto. Aquí es donde modificas los
-archivos directamente.
+    local de una versión del proyecto. Aquí es donde modificas los
+    archivos directamente.
 2.  **Staging Area (Área de Preparación):** Es un archivo,
-comúnmente llamado "index" contenido en tu Git Directory, que
-almacena la información sobre lo que incluirá tu próxima
-confirmación. Es un borrador de tu próximo commit.
+    comúnmente llamado "index" contenido en tu Git Directory, que
+    almacena la información sobre lo que incluirá tu próxima
+    confirmación. Es un borrador de tu próximo commit.
 3.  **Git Directory (Directorio `.git`):** Es donde Git almacena
-los metadatos y la base de datos de objetos de tu proyecto. Es el
-corazón de Git, y es lo que se copia cuando clonas un repositorio.
+    los metadatos y la base de datos de objetos de tu proyecto. Es el
+    corazón de Git, y es lo que se copia cuando clonas un repositorio.
 
 ### 1.2.1. Relacion entre los tres estados y secciones de Git
 
@@ -53,8 +53,8 @@ forma permanente.
 Antes de empezar a usar Git, debes configurar tu identidad.
 
 -   **Configuración de sistema** Lee y escribe especificamente en
-el archivo `/etc/gitconfig`. Valores para todos los usuarios del
-sistema.
+    el archivo `/etc/gitconfig`. Valores para todos los usuarios del
+    sistema.
 
     ~~~
     git config --system user.name "jorghee"
@@ -62,8 +62,8 @@ sistema.
     ~~~
 
 -   **Configuración global** Lee y escribe especificamente en el
-archivo `~/.gitconfig` o `~/.config/git/config`. Valores para tu
-usuario.
+    archivo `~/.gitconfig` o `~/.config/git/config`. Valores para tu
+    usuario.
 
     ~~~
     git config --global user.name "jorghee"
@@ -71,8 +71,8 @@ usuario.
     ~~~
 
 -   **Configuración especifica del repositorio** Lee y escribe
-especificamente en el archivo `config` (es decir `.git/config`).
-Es especifico del directorio actual (Repositorio actual).
+    especificamente en el archivo `config` (es decir `.git/config`).
+    Es especifico del directorio actual (Repositorio actual).
 
     ~~~
     git config user.name "jorghee"
@@ -80,7 +80,7 @@ Es especifico del directorio actual (Repositorio actual).
     ~~~
 
 -   Elige el editor de texto por defecto que se utilizara cuando
-Git necesite que introduzcas un mensaje.
+    Git necesite que introduzcas un mensaje.
 
     ~~~
     git config --global core.editor nvim
@@ -102,15 +102,15 @@ inicializando un nuevo repositorio o clonando uno existente.
 Si ya tienes un proyecto y quieres empezar a controlarlo con Git.
 
 -   Crea el esqueleto del archivo `.git` en el directorio actual.
-Ten en cuenta que aún no hay nada que este bajo seguimiento en el
-directorio.
+    Ten en cuenta que aún no hay nada que este bajo seguimiento en el
+    directorio.
 
     ~~~
-    git init 
+    git init
     ~~~
 
-- Comienza el seguimiento de los archivos dentro del directorio y
-luego realiza tu primer `commit` (confirmación).
+-   Comienza el seguimiento de los archivos dentro del directorio y
+    luego realiza tu primer `commit` (confirmación).
 
     ~~~
     git add .
@@ -128,10 +128,10 @@ Si quieres obtener una copia de un proyecto que ya existe en un
 servidor remoto (como GitHub).
 
 -   El siguiente comando, **obtiene una copia** de un repositorio
-Git existente. **crea** un directorio llamado `libgit2`,
-**inicializa** un directorio `.git` en su interior, **descarga**
-toda la información del repositorio y **saca una copia de trabajo**
-de la última versión. 
+    Git existente. **crea** un directorio llamado `libgit2`,
+    **inicializa** un directorio `.git` en su interior, **descarga**
+    toda la información del repositorio y **saca una copia de trabajo**
+    de la última versión.
 
     ~~~
     git clone https://github.com/libgit2/libgit2
@@ -184,14 +184,14 @@ adecuados a docenas de proyectos y lenguajes.
 Para saber exactamente qué has modificado.
 
 -   Muestra los cambios en el directorio de trabajo que **aún no
-han sido preparados** (unstaged).
+    han sido preparados** (unstaged).
 
     ~~~
     git diff <file>
     ~~~
 
 -   Muestra los cambios que **ya están preparados** (staged) y se
-incluirán en el próximo commit.
+    incluirán en el próximo commit.
 
     ~~~
     git diff --staged <file>   # --staged is an alias for --cached
@@ -199,12 +199,11 @@ incluirán en el próximo commit.
 
 #### Useful commands
 
-| Command                                | Description                                                                 |
-|----------------------------------------|-----------------------------------------------------------------------------|
-| `git diff --cached --word-diff`        | Igual que `--cached`, pero resalta las diferencias a nivel de palabras en lugar de líneas. |
-| `git diff-tree --no-commit-id --name-only -r <commit>` | Lista solo los nombres de archivos cambiados en un commit específico. |
-| `git diff @{upstream}`                 | Muestra las diferencias entre la rama local y su rama remota (*upstream*). |
-| `git diff --word-diff`                 | Muestra los cambios resaltando palabras modificadas en lugar de líneas completas. |
+| Command                                                | Description                                                                  |
+|--------------------------------------------------------|------------------------------------------------------------------------------|
+| `git diff --word-diff`                                 | Resalta las diferencias a nivel de palabras en lugar de líneas.              |
+| `git diff-tree --no-commit-id --name-only -r <commit>` | Lista solo los nombres de archivos cambiados en un commit específico.        |
+| `git diff @{upstream}`                                 | Muestra las diferencias entre la rama local y su rama remota (*upstream*).   |
 
 ### 1.5.4. Añadir cambios al Staging Area
 
@@ -213,72 +212,81 @@ Usa `git add` para mover tus cambios del Directorio de Trabajo al
 
 #### Useful commands
 
-| Command           | Description                                                                     |
-|-------------------|---------------------------------------------------------------------------------|
-| `git add <file>`  | Prepara los cambios del archivo especificado.                                   |
-| `git add .`       | Prepara todos los cambios (nuevos, modificados, eliminados) en el directorio actual. |
-| `git add --all` | Sube todo lo que cambió (repo/área indicada) |
-| `git add --patch`      | Permite revisar cada cambio de forma interactiva y decidir si prepararlo o no.    |
-| `git add --update`      | Prepara solo los archivos que ya están siendo rastreados (modificados y eliminados), pero no los nuevos. |
+| Command               | Description                                                                               |
+|-----------------------|-------------------------------------------------------------------------------------------|
+| `git add <file>`      | Prepara los cambios del archivo especificado.                                             |
+| `git add .`           | Prepara todos los cambios (nuevos, modificados, eliminados) solo en el directorio actual. |
+| `git add --all`       | Prepara todos los cambios del **repositorio completo** o área/repo indicada.              |
+| `git add --patch`     | Permite revisar cada cambio de forma interactiva y decidir si prepararlo o no.            |
+| `git add --update`    | Prepara solo los archivos que ya estaban rastreados (modificados y eliminados)            |
 
 ### 1.5.5. Confirmando cambios (Commit)
 
-Una vez que tu área de preparación está como la quieres, puedes
+Una vez que tu Staging area está como la quieres, puedes
 confirmar tus cambios. Cada vez que confirmas, estás guardando una
 instantánea de tu proyecto que puedes restaurar más tarde.
 
 -   Realiza un commit abriendo tu editor de texto para escribir un
-mensaje detallado.
+    mensaje detallado.
 
     ~~~
     git commit
     ~~~
 
 -   Prepara automaticamente todos los archivos rastreados antes de
-confirmarlos, ahorrandote el paso de `git add`.
+    confirmarlos, ahorrandote el paso de `git add`.
 
     ~~~
-    git commit -a -m "Added new benchmarks"
+    git commit -a -m "msg"
     ~~~
 
 #### Useful commands
 
-| Command             | Description                                                              |
-|---------------------|--------------------------------------------------------------------------|
-| `git commit -m "msg"` | Confirma los cambios con un mensaje directamente desde la línea de comandos. |
-| `git commit -v`     | Muestra los cambios que se están confirmando en el editor, para más contexto. |
-| `git commit --amend`| Modifica el último commit. Útil para corregir el mensaje o añadir cambios. |
-| `git commit -s`     | Añade una línea `Signed-off-by` al final del mensaje del commit.         |
-| `git commit -S`     | Firma el commit con GPG para verificar su autoría.                       |
+| Command               | Description                                                                   |
+|-----------------------|-------------------------------------------------------------------------------|
+| `git commit -m "msg"` | Confirma los cambios con un mensaje directamente desde la línea de comandos.  |
+| `git commit -v`       | Muestra los cambios que se están confirmando en el editor, para más contexto. |
+| `git commit --amend`  | Modifica el último commit. Útil para corregir el mensaje o añadir cambios.    |
+| `git commit -s`       | Añade una línea `Signed-off-by` al final del mensaje del commit.              |
+| `git commit -S`       | Firma el commit con GPG para verificar su autoría.                            |
 
 ### 1.5.6. Eliminar archivos
 
 Para eliminar un archivo en Git, tienes que eliminarlo de los
 archivos rastreados y luego confirmar.
 
--   Elimina el archivos del Working Directory y prepara la
-eliminación para el próximo commit. 
+-   Elimina un archivo del working directory y prepara la
+    eliminación para el próximo commit.
 
     ~~~
     git rm <file>
     ~~~
 
 -   Para forzar la eliminación si el archivo tiene cambios
-preparados.
+    preparados.
     ~~~
     git rm -f <file>       # -f de force
     ~~~
 
--   Mantiene el archivo en el Working Directory pero lo elimina del Staging Area (deja de ser rastreado)
+-   Mantiene el archivo en el working directory pero lo elimina del
+    Staging Area (deja de ser rastreado)
 
     ~~~
     git rm --cached <file>
     ~~~
 
+-   Elimina archivos no rastreados del working directory. Es útil
+    para tener un espacio de trabajo limpio.
+
+    ~~~
+    # Interactively (-i) delete directories (-d) untracked
+    git clean -id
+    ~~~
+
 ## 1.6. Ver el historial de commits
 
-- Lista los commits hechos sobre ese repositorio en orden
-cronológico inverso.
+-   Lista los commits hechos sobre ese repositorio en orden
+    cronológico inverso.
 
     ~~~
     git log
@@ -295,7 +303,7 @@ cronológico inverso.
 | `git log --graph`                     | Dibuja un gráfico ASCII de la historia de las ramas y fusiones.           |
 | `git log --pretty=format:"%h %s"`     | Formatea la salida del log. Ver la tabla de opciones más abajo.           |
 | `git log --decorate=short`            | Muestra referencias (HEAD, ramas, tags). Modos `short`, `full` y `auto`.  |
-| `git show <commit-hash>`              | Muestra los metadatos y los cambios de un commit específico.              |
+| `git show <commit>`              | Muestra los metadatos y los cambios de un commit específico.              |
 | `git blame <file>`                    | Muestra qué autor modificó por última vez cada línea de un archivo.       |
 
 #### Useful choices for `git log --pretty=format`
@@ -328,7 +336,7 @@ cronológico inverso.
 ### 1.6.1. Limitar la salida del Historial
 
 -   Lista  aquellas confirmaciones hechas después (`since`) de la
-fecha especificada.
+    fecha especificada.
     ~~~
     git log --since=2.weeks
     git log --since="2025-01-24"
@@ -337,7 +345,7 @@ fecha especificada.
 -   Lista solo aquellas confirmaciones que cumplen ciertos criterios.
 
     ~~~
-    git log --author=jorgels
+    git log --author=jorghee
     ~~~
 
 Opciones para limitar la salida de `git log`
@@ -356,19 +364,19 @@ Opciones para limitar la salida de `git log`
 En cualquier punto, puede que quieras deshacer algo.
 
 -   **Modificar el último commit:** Si has confirmado y te das
-cuenta de que olvidaste añadir un archivo o escribiste mal el
-mensaje. La instantánea del staging area reemplazará al commit
-anterior.
+    cuenta de que olvidaste añadir un archivo o escribiste mal el
+    mensaje. La instantánea del staging area reemplazará al commit
+    anterior.
 
     ~~~
-    git add forgotten_file.txt
+    git add <file>
     git commit --amend
     ~~~
 
 ### 1.7.1. Deshacer un archivo preparado
 
 -   Si preparaste un archivo por error, este comando lo devuelve
-al estado "Modified".
+    al estado "Modified".
 
     ~~~
     git reset HEAD <file>
@@ -379,27 +387,43 @@ al estado "Modified".
 > explotarlo para que haga cosas realmente interesantes.
 
 ### 1.7.2. Deshacer un archivo modificado
-- Si quieres descartar los cambios hechos en tu directorio de
-trabajo desde el último commit.
+
+Este comando es relativamente nuevo y sirve para reemplazar
+contenido en el working directory o en el staging area.
+
+-   Si quieres descartar los cambios hechos en tu working
+    directory y restaurarlo desde el último commit (HEAD).
 
     ~~~
     git restore <file>
     ~~~
 
+#### Useful commands
+
+| Command                                  | Description                                                                                        |
+|------------------------------------------|----------------------------------------------------------------------------------------------------|
+| `git restore --source=<commit> <file>`   | Restaura un archivo desde un commit/tag/branch específico al working directory.                    |
+| `git restore --staged <file>`            | Quita un archivo del staging area (los cambios permanecen en el working directory).                |
+| `git restore --staged --worktree <file>` | Restaura un archivo tanto en el staging area como en el working directory desde el último commit.  |
+
+> [!NOTE]
+> El comando `git restore --staged <file>` es
+> equivalente moderno al comando `git reset HEAD <file>`
+
 ### 1.7.3. Deshacer commits
 
 #### Los 3 árboles
+
 Una manera más fácil de pensar sobre `reset` y `checkout` es
 comprender a Git como un administrador de contenido de tres
 árboles diferentes.
 
 > [!IMPORTANT]
-> Por “árbol”, aquí realmente queremos decir “colección de
-> archivos”, no específicamente la estructura de
-> datos. (Hay algunos casos donde el índice no funciona
-> exactamente como un árbol, pero
-> para nuestros propósitos es más fácil pensarlo de esta
-> manera por ahora)
+> Por "árbol", aquí realmente queremos decir "colección de
+> archivos", **no específicamente la estructura de
+> datos**. (Hay algunos casos donde el índice no funciona
+> exactamente como un árbol, pero para nuestros propósitos
+> es más fácil pensarlo de esta manera por ahora)
 
 1. **HEAD** Es el puntero a la referencia de bifurcación
     actual, que es, a su vez, un puntero al último commit
@@ -413,7 +437,7 @@ comprender a Git como un administrador de contenido de tres
 > [!NOTE]
 > Es bastante fácil ver cómo es el aspecto de ese snapshot
 > (instantánea). Aquí hay un ejemplo de cómo obtener la **lista del
-> directorio real** y **las sumas de comprobación SHA-256
+> directorio real** y **las sumas de comprobación SHA-1
 > para cada archivo** en la instantánea de HEAD.
 
 ~~~
@@ -430,9 +454,9 @@ $ git ls-tree -r HEAD
 040000 tree 99f1a6d12cb4b6f19... lib
 ~~~
 
-2. **Índice** Es tu **siguiente commit propuesto**. También nos
-    hemos estado refiriendo a este concepto como el "Área de
-    Preparación" de Git ya que esto es lo que Git ve cuando
+2. **Index** Es tu **siguiente commit propuesto**. También nos
+    hemos estado refiriendo a este concepto como el Staging 
+    Area de Git ya que esto es lo que Git ve cuando
     ejecutas `git commit`.
 
 > [!IMPORTANT]
@@ -460,30 +484,27 @@ $ git ls-files -s
 #### Useful commands
 
 -   **`git reset`**: Mueve el puntero `HEAD` a un commit anterior,
-afectando potencialmente el **Staging Area** y el **Working
-Directory**. Es poderoso pero puede ser destructivo.
+    afectando potencialmente el **Staging Area** y el **Working
+    Directory**. Es poderoso pero puede ser destructivo.
 
-    | Command                   | Description                                                                                             |
-    |---------------------------|---------------------------------------------------------------------------------------------------------|
-    | `git reset --soft HEAD~1` | Deshace el último commit, pero mantiene los cambios en el Staging Area.                                  |
-    | `git reset --mixed HEAD~1`| **(Por defecto)** Deshace el último commit y deja los cambios en el Working Directory (unstaged).         |
-    | `git reset --hard HEAD~1` | **Danger** Deshace el último commit y descarta todos los cambios en el Staging Area y Working Directory. |
+    | Command                       | Description                                                                                           |
+    |------------------------------ | ------------------------------------------------------------------------------------------------------|
+    | `git reset --soft HEAD~1`     | Deshace el último commit, pero mantiene los cambios en el Staging Area.                               |
+    | `git reset --mixed <commit>`  | **(Por defecto)** Deshace el `<commit>`y deja los cambios en el working directory (unstaged).         |
+    | `git reset --hard <commit>`   | **Danger** Deshace el `<commit>` y descarta todos los cambios en el Staging Area y working directory. |
 
 -   **`git revert`**: Crea un **nuevo commit** que invierte los
-cambios introducidos por un commit anterior. Es la forma segura de
-deshacer cambios en un historial público, ya que no reescribe la
-historia.
+    cambios introducidos por un commit anterior. Es la forma segura de
+    deshacer cambios en un historial público, ya que no reescribe la
+    historia.
 
-    ~~~
-    git revert <commit-hash>
-    ~~~
-
--   **`git clean`**: Elimina archivos no rastreados del Working
-Directory. Es útil para tener un espacio de trabajo limpio.
-
-    ~~~
-    git clean -fd  # Delete files (-f) and directories (-d) untracked
-    ~~~
+    | Command                               | Description                                                                            |
+    | ------------------------------------- | -------------------------------------------------------------------------------------- |
+    | `git revert <commit>`                 | Crea un nuevo commit que revierte los cambios introducidos por `<commit>`.             |
+    | `git revert --no-commit <commit>`     | Revierte los cambios pero no crea un commit automáticamente (quedan en staging).       |
+    | `git revert -m 1 <merge-commit>`      | Revierte un commit de merge, especificando el padre que debe considerarse como "base". |
+    | `git revert --continue`               | Se usa tras resolver conflictos al revertir un commit.                                 |
+    | `git revert --abort`                  | Cancela un revert en curso (si hay conflictos).                                        |
 
 ---
 
@@ -498,15 +519,24 @@ tus commits.
 Las ramas te permiten divergir de la línea principal de desarrollo
 y continuar trabajando de forma aislada sin afectar esa línea principal.
 
-| Command                       | Description                                                     |
-|-------------------------------|-----------------------------------------------------------------|
-| `git branch`                  | Lista todas las ramas locales. La actual está marcada con `*`.    |
-| `git branch <nombre-rama>`    | Crea una nueva rama.                                            |
-| `git switch <nombre-rama>`    | Cambia a la rama especificada. Es el comando moderno y preferido. |
-| `git switch -c <nombre-rama>` | Crea una nueva rama y cambia a ella inmediatamente.             |
-| `git branch -d <nombre-rama>` | Elimina una rama que ya ha sido fusionada.                      |
-| `git branch -D <nombre-rama>` | Fuerza la eliminación de una rama, incluso si no ha sido fusionada. |
-| `git branch -a`               | Lista todas las ramas, tanto locales como remotas.              |
+#### Useful commands
+
+| Command                                           | Description                                                                   |
+|---------------------------------------------------|-------------------------------------------------------------------------------|
+| `git branch`                                      | Lista todas las ramas locales. La actual está marcada con `*`.                |
+| `git branch <branch-name>`                        | Crea una nueva rama.                                                          |
+| `git switch <branch-name>`                        | Cambia a la rama especificada. Es el comando moderno y preferido.             |
+| `git switch -c <branch-name>`                     | Crea una nueva rama y cambia a ella inmediatamente.                           |
+| `git branch --delete <branch-name>`               | Elimina una rama que ya ha sido fusionada.                                    |
+| `git branch -D <branch-name>`                     | Fuerza la eliminación de una rama, incluso si no ha sido fusionada.           |
+| `git branch --all`                                | Lista todas las ramas, tanto locales como remotas.                            |
+| `git branch --merged`                             | Lista ramas ya fusionadas en la rama actual.                                  |
+| `git branch --no-merged`                          | Lista ramas locales que aún **no han sido fusionadas** en la rama actual.     |
+| `git branch --remote`                             | Lista solo las ramas remotas (las que existen en `origin` u otros remotos).   |
+| `git branch --set-upstream-to=origin/<branch>`    | Configura la rama actual para rastrear una rama remota.                       |
+| `git branch --list <pattern>`                     | Lista ramas que coincidan con un patrón.                                      |
+| `git branch -m <old> <new>`                       | Renombra una rama específica.                                                 |
+| `git branch -vv`                                  | Lista ramas locales con información extra (seguimiento, upstream, commits).   |
 
 ### 1.8.2. Fusión de ramas (Merging)
 
@@ -526,6 +556,22 @@ git merge <name-branch-to-merge>
 > producirá un conflicto. Deberás resolver el conflicto manualmente
 > editando el archivo, guardándolo, y luego usando `git add` y
 > `git commit` para finalizar la fusión.
+
+#### Useful commands
+
+| Command                        | Description                                                                                                  |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `git merge --abort`            | Cancela el merge en curso y restaura el estado anterior (si hay conflictos).                                 |
+| `git merge --no-ff <branch>`   | Fuerza la creación de un commit de merge, incluso si se podría hacer *fast-forward*.                         |
+| `git merge --squash <branch>`  | Combina todos los commits de `<branch>` en **un solo commit** en la rama actual (no crea commit automático). |
+| `git merge --ff-only <branch>` | Solo permite un *fast-forward*. Falla si requiere un merge real.                                             |
+| `git merge --commit`           | Asegura que se cree un commit de merge (por defecto lo hace si es necesario).                                |
+| `git merge --no-commit`        | Fusiona cambios pero deja la preparación en staging, sin crear commit automático.                            |
+| `git mergetool`                | Abre la herramienta de merge configurada para resolver conflictos.                                           |
+| `git mergetool --no-prompt`    | Ejecuta el *mergetool* sin pedir confirmación por cada archivo en conflicto.                                 |
+| `git mergetool --tool=<tool>`  | Especifica la herramienta de merge a usar (`vimdiff`, `meld`, `kdiff3`, etc.).                               |
+| `git mergetool --tool-help`    | Lista todas las herramientas de merge disponibles en tu Git.                                                 |
+| `git mergetool --gui`          | Abre la versión gráfica de la herramienta (si está disponible).                                              |
 
 ## 1.9. Reorganizando el trabajo
 
@@ -585,7 +631,7 @@ git rebase --onto <new-base> <upstream> <branch>
 Permite tomar un commit específico de una rama y aplicarlo sobre otra.
 
 ~~~
-git cherry-pick <commit-hash>   # list of commits
+git cherry-pick <commit>   # list of commits
 ~~~
 
 #### Useful commands
@@ -617,7 +663,7 @@ y te devuelve a un directorio de trabajo limpio.
 ## 1.11. Trabajar con remotos
 
 -   Muestra los repositorios remotos configurados en tu maquina
-local. La opcion `-v` muestra las URLs.
+    local. La opcion `-v` muestra las URLs.
 
     ~~~
     git remote
@@ -650,19 +696,19 @@ repositorios remotos.**
 > varios servidores (repositorios remotos). 
 
 > *Un repositorio remoto no es más que una referencia guardada en 
-tu repositorio local.*
+> tu repositorio local.*
 
 ---
 
 -   Añade un nuevo remoto con un nombre corto que puedas
-referenciar fácilmente.
+    referenciar fácilmente.
 
     ~~~
     git remote add <remote-name> <url>
     ~~~
 
     > Por convención, el repositorio original del que clonaste se
-    llama `origin`.
+    > llama `origin`.
 
 > [!IMPORTANT]
 > El `remote-name` no tiene que coincidir con el nombre del
