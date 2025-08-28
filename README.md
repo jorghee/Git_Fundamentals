@@ -923,10 +923,12 @@ sí existe), y Git te guiará para encontrar al culpable.
 > por tu cuenta.
 
 > [!NOTE]
-> - Usa GitHub, es el programa mas usado para alojar tus
->   repositorios remotos.
-> - Practica y prueba los siguiente comandos para analizar su
->   funcionamiento, no esperes a que te digan que es lo que va a
->   pasar, tu puedes probarlo.
-> - Te exigo tener creado un repositorio local y uno remoto.
->   Nombralos como mas te guste.
+> - Usa GitHub, es el programa más usado para alojar tus
+>   repositorios remotos
+> - Practica y prueba los comandos para analizar su
+>   funcionamiento. No esperes que te digan qué es lo que va a
+>   pasar, tú puedes probarlo
+> - Crea un repositorio local y uno remoto para practicar.
+>   Nombralos como más te guste
+
+<samp>**Gracias por pasarte por aquí, bye**<samp>
