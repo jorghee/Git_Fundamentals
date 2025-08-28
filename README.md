@@ -1,42 +1,45 @@
-*   [1. Git Fundamentals](#1-git-fundamentals)
-    *   [1.1. Los tres estados de Git](#11-los-tres-estados-de-git)
-    *   [1.2. Las Tres Secciones Principales](#12-las-tres-secciones-principales)
-        *   [1.2.1. Relación entre los tres estados y secciones de Git](#121-relacion-entre-los-tres-estados-y-secciones-de-git)
-    *   [1.3. Configurando Git por primera vez](#13-configurando-git-por-primera-vez)
-    *   [1.4. Creando y Obteniendo Repositorios](#14-creando-y-obteniendo-repositorios)
-        *   [1.4.1. Inicializando un repositorio en un directorio existente](#141-inicializando-un-repositorio-en-un-directorio-existente)
-        *   [1.4.2. Clonando un repositorio existente](#142-clonando-un-repositorio-existente)
-    *   [1.5. Flujo de trabajo básico (Basic Workflow)](#15-flujo-de-trabajo-básico-basic-workflow)
-        *   [1.5.1. Revisando el Estado de tus archivos](#151-revisando-el-estado-de-tus-archivos)
-        *   [1.5.2. Ignorar archivos: el archivo `.gitignore`](#152-ignorar-archivos-el-archivo-gitignore)
-        *   [1.5.3. Ver los cambios (Staged y Unstaged)](#153-ver-los-cambios-staged-y-unstaged)
-        *   [1.5.4. Añadir cambios al Staging Area](#154-añadir-cambios-al-staging-area)
-        *   [1.5.5. Confirmando cambios (Commit)](#155-confirmando-cambios-commit)
-        *   [1.5.6. Eliminar archivos](#156-eliminar-archivos)
-    *   [1.6. Ver el historial de commits](#16-ver-el-historial-de-commits)
-        *   [1.6.1. Limitar la salida del Historial](#161-limitar-la-salida-del-historial)
-    *   [1.7. Deshacer cosas](#17-deshacer-cosas)
-        *   [1.7.1. Deshacer un archivo preparado](#171-deshacer-un-archivo-preparado)
-        *   [1.7.2. Deshacer un archivo modificado](#172-deshacer-un-archivo-modificado)
-        *   [1.7.3. Deshacer commits: Los 3 árboles](#173-deshacer-commits-los-3-árboles)
-    *   [1.8. Ramas (Branching): El superpoder de Git](#18-ramas-branching-el-superpoder-de-git)
-        *   [1.8.1. Creación, listado y cambio de ramas](#181-creación-listado-y-cambio-de-ramas)
-        *   [1.8.2. Fusión de ramas (Merging)](#182-fusión-de-ramas-merging)
-    *   [1.9. Reorganizando el trabajo](#19-reorganizando-el-trabajo)
-        *   [1.9.1. Rebase: La alternativa a la fusión](#191-rebase-la-alternativa-a-la-fusión)
-        *   [1.9.2. Rebase Interactivo](#192-rebase-interactivo)
-        *   [1.9.3. Rebase Avanzado](#193-rebase-avanzado)
-        *   [1.9.4. Cherry-pick](#194-cherry-pick)
-    *   [1.10. Guardado temporal de cambios (Stashing)](#110-guardado-temporal-de-cambios-stashing)
-    *   [1.11. Trabajar con remotos](#111-trabajar-con-remotos)
-        *   [1.11.1. Añadir repositorios remotos](#1111-añadir-repositorios-remotos)
-        *   [1.11.2. Traer, combinar y enviar a remotos](#1112-traer-combinar-y-enviar-a-remotos)
-        *   [1.11.4. Inspeccionar y gestionar remotos](#1114-inspeccionar-y-gestionar-remotos)
-    *   [1.12. Etiquetado (Tagging)](#112-etiquetado-tagging)
+[Git Fundamentals](#1-git-fundamentals)
+*   [1. Los tres estados de Git](#11-los-tres-estados-de-git)
+*   [2. Las Tres Secciones Principales](#12-las-tres-secciones-principales)
+    *   [2.1. Relación entre los tres estados y secciones de Git](#121-relacion-entre-los-tres-estados-y-secciones-de-git)
+*   [3. Configurando Git por primera vez](#13-configurando-git-por-primera-vez)
+*   [4. Creando y Obteniendo Repositorios](#14-creando-y-obteniendo-repositorios)
+    *   [4.1. Inicializando un repositorio en un directorio existente](#141-inicializando-un-repositorio-en-un-directorio-existente)
+    *   [4.2. Clonando un repositorio existente](#142-clonando-un-repositorio-existente)
+*   [5. Flujo de trabajo básico (Basic Workflow)](#15-flujo-de-trabajo-básico-basic-workflow)
+    *   [5.1. Revisando el Estado de tus archivos](#151-revisando-el-estado-de-tus-archivos)
+    *   [5.2. Ignorar archivos y sus cambios](#152-ignorar-archivos-y-sus-cambios)
+    *   [5.3. Ver los cambios (Staged y Unstaged)](#153-ver-los-cambios-staged-y-unstaged)
+    *   [5.4. Añadir cambios al Staging Area](#154-añadir-cambios-al-staging-area)
+    *   [5.5. Confirmando cambios (Commit)](#155-confirmando-cambios-commit)
+    *   [5.6. Eliminar archivos](#156-eliminar-archivos)
+*   [6. Ver el historial de commits](#16-ver-el-historial-de-commits)
+    *   [6.1. Limitar la salida del Historial](#161-limitar-la-salida-del-historial)
+*   [7. Deshacer cosas](#17-deshacer-cosas)
+    *   [7.1. Deshacer un archivo preparado](#171-deshacer-un-archivo-preparado)
+    *   [7.2. Deshacer un archivo modificado](#172-deshacer-un-archivo-modificado)
+    *   [7.3. Deshacer commits: Los 3 árboles](#173-deshacer-commits-los-3-árboles)
+*   [8. Ramas (Branching): El superpoder de Git](#18-ramas-branching-el-superpoder-de-git)
+    *   [8.1. Creación, listado y cambio de ramas](#181-creación-listado-y-cambio-de-ramas)
+    *   [8.2. Fusión de ramas (Merging)](#182-fusión-de-ramas-merging)
+*   [9. Reorganizando el trabajo](#19-reorganizando-el-trabajo)
+    *   [9.1. Rebase: La alternativa a la fusión](#191-rebase-la-alternativa-a-la-fusión)
+    *   [9.2. Rebase Interactivo](#192-rebase-interactivo)
+    *   [9.3. Rebase Avanzado](#193-rebase-avanzado)
+    *   [9.4. Cherry-pick](#194-cherry-pick)
+*   [10. Guardado temporal de cambios (Stashing)](#110-guardado-temporal-de-cambios-stashing)
+*   [11. Trabajar con remotos](#111-trabajar-con-remotos)
+    *   [11.1. Añadir repositorios remotos](#1111-añadir-repositorios-remotos)
+    *   [11.2. Traer, combinar y enviar a remotos](#1112-traer-combinar-y-enviar-a-remotos)
+    *   [11.4. Inspeccionar y gestionar remotos](#1114-inspeccionar-y-gestionar-remotos)
+*   [12. Etiquetado (Tagging)](#112-etiquetado-tagging)
+*   [13. Gestión de Dependencias con Submódulos](#113-Gestión-de-Dependencias-con-Submódulos)
+*   [14. Depuración con Git](#114-etiquetado-tagging)
+    *   [14.1. Encontrando el commit defectuoso con `bisect`](#1141-Encontrando-el-commit-defectuoso-con-bisect)
 
 ---
 
-# 1. Git Fundamentals
+# Git Fundamentals
 
 Git es un sistema de control de versiones distribuido que permite
 rastrear y gestionar cambios en el código fuente durante el
@@ -47,7 +50,7 @@ desarrollo de software.
 >
 > <samp>~ Paz Valderrama</samp>
 
-## 1.1. Los tres estados de Git
+## 1. Los tres estados de Git
 
 Para entender Git, es crucial conocer los tres estados principales
 en los que puede encontrarse un archivo:
@@ -61,7 +64,7 @@ en los que puede encontrarse un archivo:
 3.  **Committed (Confirmado):** Significa que los cambios estan
     almacenados de forma segura en tu base de datos local de Git.
 
-## 1.2. Las Tres Secciones Principales
+## 2. Las Tres Secciones Principales
 
 Estos estados se corresponden con tres secciones de trabajo en un
 proyecto de Git:
@@ -77,7 +80,7 @@ proyecto de Git:
     los metadatos y la base de datos de objetos de tu proyecto. Es el
     corazón de Git, y es lo que se copia cuando clonas un repositorio.
 
-### 1.2.1. Relacion entre los tres estados y secciones de Git
+### 2.1. Relacion entre los tres estados y secciones de Git
 
 La relación es simple: modificas archivos en tu **Directorio de
 Trabajo**, los preparas (añades) al **Área de Preparación**, y
@@ -87,7 +90,7 @@ forma permanente.
 
 ---
 
-## 1.3. Configurando Git por primera vez
+## 3. Configurando Git por primera vez
 
 Antes de empezar a usar Git, debes configurar tu identidad.
 
@@ -131,12 +134,12 @@ Antes de empezar a usar Git, debes configurar tu identidad.
     git config --list
     ~~~
 
-## 1.4. Creando y Obteniendo Repositorios
+## 4. Creando y Obteniendo Repositorios
 
 Puedes empezar a trabajar con Git de dos maneras principales:
 inicializando un nuevo repositorio o clonando uno existente.
 
-### 1.4.1. Inicializando un repositorio en un directorio existente
+### 4.1. Inicializando un repositorio en un directorio existente
 
 Si ya tienes un proyecto y quieres empezar a controlarlo con Git.
 
@@ -161,7 +164,7 @@ usamos para empezar a **rastrear archivos nuevos** (como en este
 caso); tambien para **preparar archivos** y **marcar archivos
 en conflicto como resueltos**.
 
-### 1.4.2. Clonando un repositorio existente
+### 4.2. Clonando un repositorio existente
 
 Si quieres obtener una copia de un proyecto que ya existe en un
 servidor remoto (como GitHub).
@@ -190,13 +193,13 @@ servidor remoto (como GitHub).
 | `git clone --recurse-submodules` | Clona un repositorio junto con todos sus *submódulos*, inicializándolos y descargando su contenido. |
 | `git clone --depth <number> <url>` | Clona un repositorio con un historial reducido (*shallow clone*) |
 
-## 1.5. Basic workflow
+## 5. Basic workflow
 
 Una vez que tu repositorio está configurado, tu día a día
 consistirá en un ciclo de modificación, preparación y confirmación
 de cambios.
 
-### 1.5.1 Revisando el Estado de tus archivos
+### 5.1 Revisando el Estado de tus archivos
 
 El comando más importante para saber qué está pasando en tu
 repositorio.
@@ -212,13 +215,33 @@ git status
 | `git status -s`        | Muestra una salida breve y compacta del estado.  |
 | `git status -sb`       | Salida breve que también muestra la rama actual. |
 
-### 1.5.2. Ignorar archivos: el archivo `.gitignore`
+### 5.2. Ignorar archivos y sus cambios
+
+#### El archivo `.gitignore`
 
 GitHub mantiene una extensa lista de archivos
 [.gitignore templates](https://github.com/github/gitignore)
 adecuados a docenas de proyectos y lenguajes.
 
-### 1.5.3. Ver los cambios (Staged y Unstaged)
+#### Ignorando cambios en archivos rastreados
+
+A veces, necesitas modificar localmente un archivo que ya está bajo
+control de versiones (por ejemplo, un archivo de configuración) pero
+no quieres confirmar esos cambios. El archivo `.gitignore` no
+funciona para esto, ya que solo afecta a archivos no rastreados.
+
+> [!CAUTION]
+> Usa este comando con precaución. Es fácil olvidar qué archivos has
+> marcado de esta manera, lo que puede llevar a que cambios
+> importantes no se confirmen.
+
+| Command                                        | Description                                                                                  |
+|------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `git update-index --assume-unchanged <file>`   | Ignora temporalmente los cambios futuros en un archivo que ya está siendo rastreado.         |
+| `git update-index --no-assume-unchanged <file>`| Vuelve a rastrear los cambios en el archivo.                                                 |
+| `git ls-files -v \| grep '^h'`                 | Lista los archivos marcados con `--assume-unchanged` (la `h` minúscula indica esta marca).   |
+
+### 5.3. Ver los cambios (Staged y Unstaged)
 
 Para saber exactamente qué has modificado.
 
@@ -244,7 +267,7 @@ Para saber exactamente qué has modificado.
 | `git diff-tree --no-commit-id --name-only -r <commit>` | Lista solo los nombres de archivos cambiados en un commit específico.        |
 | `git diff @{upstream}`                                 | Muestra las diferencias entre la rama local y su rama remota (*upstream*).   |
 
-### 1.5.4. Añadir cambios al Staging Area
+### 5.4. Añadir cambios al Staging Area
 
 Usa `git add` para mover tus cambios del Directorio de Trabajo al 
 Área de Preparación.
@@ -259,7 +282,7 @@ Usa `git add` para mover tus cambios del Directorio de Trabajo al
 | `git add --patch`     | Permite revisar cada cambio de forma interactiva y decidir si prepararlo o no.            |
 | `git add --update`    | Prepara solo los archivos que ya estaban rastreados (modificados y eliminados)            |
 
-### 1.5.5. Confirmando cambios (Commit)
+### 5.5. Confirmando cambios (Commit)
 
 Una vez que tu Staging area está como la quieres, puedes
 confirmar tus cambios. Cada vez que confirmas, estás guardando una
@@ -289,7 +312,7 @@ instantánea de tu proyecto que puedes restaurar más tarde.
 | `git commit -s`       | Añade una línea `Signed-off-by` al final del mensaje del commit.              |
 | `git commit -S`       | Firma el commit con GPG para verificar su autoría.                            |
 
-### 1.5.6. Eliminar archivos
+### 5.6. Eliminar archivos
 
 Para eliminar un archivo en Git, tienes que eliminarlo de los
 archivos rastreados y luego confirmar.
@@ -322,7 +345,7 @@ archivos rastreados y luego confirmar.
     git clean -id
     ~~~
 
-## 1.6. Ver el historial de commits
+## 6. Ver el historial de commits
 
 -   Lista los commits hechos sobre ese repositorio en orden
     cronológico inverso.
@@ -342,8 +365,9 @@ archivos rastreados y luego confirmar.
 | `git log --graph`                     | Dibuja un gráfico ASCII de la historia de las ramas y fusiones.           |
 | `git log --pretty=format:"%h %s"`     | Formatea la salida del log. Ver la tabla de opciones más abajo.           |
 | `git log --decorate=short`            | Muestra referencias (HEAD, ramas, tags). Modos `short`, `full` y `auto`.  |
-| `git show <commit>`              | Muestra los metadatos y los cambios de un commit específico.              |
+| `git show <commit>`                   | Muestra los metadatos y los cambios de un commit específico.              |
 | `git blame <file>`                    | Muestra qué autor modificó por última vez cada línea de un archivo.       |
+| `git shortlog -sn`                    | Muestra un resumen de commits agrupados por autor, con conteo de commits. |
 
 #### Useful choices for `git log --pretty=format`
 
@@ -372,7 +396,7 @@ archivos rastreados y luego confirmar.
 > colaborador lo revisaré y lo aplicaré. En este caso, **tú eres el
 > *author* y yo soy el *committer*.**
 
-### 1.6.1. Limitar la salida del Historial
+### 6.1. Limitar la salida del Historial
 
 -   Lista  aquellas confirmaciones hechas después (`since`) de la
     fecha especificada.
@@ -398,7 +422,7 @@ Opciones para limitar la salida de `git log`
 | --committer       | Muestra solo commits cuyo committer coincide con la cadena especificada                       |
 | -S                | Muestra solo commits que agregan o eliminan codigo que corresponda con la cadena especificada |
 
-## 1.7. Deshacer cosas
+## 7. Deshacer cosas
 
 En cualquier punto, puede que quieras deshacer algo.
 
@@ -412,7 +436,7 @@ En cualquier punto, puede que quieras deshacer algo.
     git commit --amend
     ~~~
 
-### 1.7.1. Deshacer un archivo preparado
+### 7.1. Deshacer un archivo preparado
 
 -   Si preparaste un archivo por error, este comando lo devuelve
     al estado "Modified".
@@ -425,7 +449,7 @@ En cualquier punto, puede que quieras deshacer algo.
 > El comando `reset` es mágico, se recomienda investigar cómo
 > explotarlo para que haga cosas realmente interesantes.
 
-### 1.7.2. Deshacer un archivo modificado
+### 7.2. Deshacer un archivo modificado
 
 Este comando es relativamente nuevo y sirve para reemplazar
 contenido en el working directory o en el staging area.
@@ -449,7 +473,7 @@ contenido en el working directory o en el staging area.
 > El comando `git restore --staged <file>` es
 > equivalente moderno al comando `git reset HEAD <file>`
 
-### 1.7.3. Deshacer commits
+### 7.3. Deshacer commits
 
 #### Los 3 árboles
 
@@ -520,6 +544,18 @@ $ git ls-files -s
 3. **Working Directory** Descomprime los objetos del directorio `.git`
     para tratarlos como archivos reales listos para ser editados.
 
+#### Inspeccionando el Index con `git ls-files`
+
+El comando `git ls-files` es una herramienta de bajo nivel para ver
+el contenido del Index.
+
+| Command                                   | Description                                                                               |
+|-------------------------------------------|-------------------------------------------------------------------------------------------|
+| `git ls-files`                            | Lista todos los archivos que están actualmente en el Index (Staging Area).                |
+| `git ls-files -s`                         | Muestra los archivos en el Index con su modo, hash del objeto (blob) y número de etapa.   |
+| `git ls-files -u`                         | Muestra solo los archivos que tienen conflictos de fusión (unmerged).                     |
+| `git ls-files --others --exclude-standard`| Muestra los archivos no rastreados (`untracked`), respetando `.gitignore`.                |
+
 #### Useful commands
 
 -   **`git reset`**: Mueve el puntero `HEAD` a un commit anterior,
@@ -547,13 +583,13 @@ $ git ls-files -s
 
 ---
 
-## 1.8. Ramas (Branching): El superpoder de Git
+## 8. Ramas (Branching): El superpoder de Git
 
 Una de las características más importantes de Git es su sistema de
 ramas. Una rama es esencialmente un puntero móvil y ligero a uno de
 tus commits.
 
-### 1.8.1. Creación, listado y cambio de ramas
+### 8.1. Creación, listado y cambio de ramas
 
 Las ramas te permiten divergir de la línea principal de desarrollo
 y continuar trabajando de forma aislada sin afectar esa línea principal.
@@ -577,7 +613,7 @@ y continuar trabajando de forma aislada sin afectar esa línea principal.
 | `git branch -m <old> <new>`                       | Renombra una rama específica.                                                 |
 | `git branch -vv`                                  | Lista ramas locales con información extra (seguimiento, upstream, commits).   |
 
-### 1.8.2. Fusión de ramas (Merging)
+### 8.2. Fusión de ramas (Merging)
 
 Una vez que has completado el trabajo en tu rama, puedes fusionar
 tus cambios de nuevo en la rama principal.
@@ -612,9 +648,9 @@ git merge <name-branch-to-merge>
 | `git mergetool --tool-help`    | Lista todas las herramientas de merge disponibles en tu Git.                                                 |
 | `git mergetool --gui`          | Abre la versión gráfica de la herramienta (si está disponible).                                              |
 
-## 1.9. Reorganizando el trabajo
+## 9. Reorganizando el trabajo
 
-### 1.9.1. Rebase: La alternativa a la fusión
+### 9.1. Rebase: La alternativa a la fusión
 
 Rebase es otra forma de integrar cambios de una rama a otra. En lugar
 de crear un commit de fusión, rebase **reaplica** los commits de tu
@@ -641,7 +677,7 @@ git rebase main
 | `git rebase --continue`   | Continúa el rebase tras resolver conflictos manualmente.      |
 | `git rebase --skip`       | Omite el commit en conflicto y prosigue con el rebase.        |
 
-### 1.9.2. Rebase Interactivo
+### 9.2. Rebase Interactivo
 
 Una herramienta increíblemente poderosa para reescribir, combinar,
 reordenar y eliminar commits antes de compartirlos.
@@ -650,7 +686,7 @@ reordenar y eliminar commits antes de compartirlos.
 git rebase -i HEAD~3   # Revisa y modifica los últimos 3 commits
 ~~~
 
-### 1.9.3. Rebase Avanzado
+### 9.3. Rebase Avanzado
 
 El rebase avanzado permite mover un rango específico de commits
 desde una rama y reaplicarlos sobre otra base diferente.
@@ -665,7 +701,7 @@ git rebase --onto <new-base> <upstream> <branch>
 * `<upstream>`: Hasta dónde cortar de la historia.
 * `<branch>`: La rama que contiene los commits a mover.
 
-### 1.9.4. Cherry-pick
+### 9.4. Cherry-pick
 
 Permite tomar un commit específico de una rama y aplicarlo sobre otra.
 
@@ -680,7 +716,7 @@ git cherry-pick <commit>   # list of commits
 | `git cherry-pick --abort`     | Cancela el proceso de cherry-pick en curso y revierte los cambios aplicados.  |
 | `git cherry-pick --continue`  | Reanuda un cherry-pick después de resolver conflictos manualmente.            |
 
-## 1.10. Guardado temporal de cambios (Stashing)
+## 10. Guardado temporal de cambios (Stashing)
 
 A veces necesitas cambiar de rama, pero tienes trabajo a medio hacer
 que no quieres confirmar todavía. El comando `stash` toma tu estado
@@ -699,7 +735,7 @@ y te devuelve a un directorio de trabajo limpio.
 | `git stash clear`                     | Elimina todos los stashes.                                                |
 | `git stash show --text`               | Muestra el contenido detallado del último stash en formato de texto.      |
 
-## 1.11. Trabajar con remotos
+## 11. Trabajar con remotos
 
 -   Muestra los repositorios remotos configurados en tu maquina
     local. La opcion `-v` muestra las URLs.
@@ -709,7 +745,7 @@ y te devuelve a un directorio de trabajo limpio.
     git remote -v
     ~~~
 
-### 1.11.1. Añadir repositorios remotos 
+### 11.1. Añadir repositorios remotos 
 
 Añadir un repositorio remoto significa **establecer una conexion
 entre tu repositorio local y cualquier otro repositorio o
@@ -756,7 +792,7 @@ repositorios remotos.**
 > igual porque es solo un `alias` para simplificar las operaciones
 > con el repositorio.
 
-### 1.11.2. Traer, combinar y enviar a remotos
+### 11.2. Traer, combinar y enviar a remotos
 
 -   `fetch`: Trae toda la información que aún no tienes del
     repositorio remoto. **Solo descarga los datos**; no los
@@ -805,7 +841,7 @@ repositorios remotos.**
 | `git push --force-with-lease` | Fuerza un push solo si la rama remota no ha sido actualizada por otra persona. Más seguro que `--force`.  |
 | `git push --dry-run`          | Simula un `push` mostrando qué cambios se enviarían, sin subir nada al remoto.                            |
 
-### 1.11.4. Inspeccionar y gestionar remotos
+### 11.4. Inspeccionar y gestionar remotos
 
 -   Muestra informacion detallada sobre un remoto en particular.
 
@@ -827,7 +863,7 @@ repositorios remotos.**
 | `git remote update`    | Descarga actualizaciones de todos los remotos y sus ramas, pero sin fusionarlas ni modificarlas localmente.  |
 | `git remote set-url`   | Cambia la URL asociada a un remoto existente (ej. pasar de HTTPS a SSH).                                     |
 
-## 1.12. Etiquetado (Tagging)
+## 12. Etiquetado (Tagging)
 
 Git puede etiquetar puntos específicos en el historial como
 importantes. Típicamente, la gente usa esta funcionalidad para
@@ -842,15 +878,51 @@ marcar puntos de lanzamiento.
 | `git tag v1.4-lw`                 | Crea un tag "ligera", que es solo un puntero a un commit.                     |
 | `git push origin --tags`          | Empuja todas tus etiquetas al servidor remoto.                                |
 
+## 13. Gestión de Dependencias con Submódulos
+
+Los submódulos permiten mantener un repositorio de Git como un
+subdirectorio dentro de otro repositorio. Esto es útil para gestionar
+dependencias de proyectos o incluir bibliotecas de terceros sin
+copiar su código fuente en tu repositorio.
+
+| Command                               | Description                                                                                               |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `git submodule add <url> <path>`      | Añade un nuevo submódulo en la ruta especificada, rastreando el repositorio de la URL.                    |
+| `git submodule init`                  | Inicializa los submódulos configurados en el proyecto (registrados en el archivo `.gitmodules`).          |
+| `git submodule update`                | Clona los repositorios de los submódulos y los actualiza al commit especificado en el repositorio padre.  |
+| `git submodule update --remote`       | Actualiza el submódulo a la última versión de su rama remota, en lugar del commit registrado.             |
+| `git clone --recurse-submodules <url>`| Clona un repositorio e inicializa y actualiza automáticamente todos sus submódulos.                       |
+
+## 14. Depuración con Git
+
+Git proporciona herramientas poderosas para encontrar errores en el
+historial de tu proyecto.
+
+### 14.1. Encontrando el commit defectuoso con `bisect`
+
+`git bisect` utiliza una búsqueda binaria para encontrar el commit
+específico que introdujo un bug. El proceso es simple: le dices a Git
+un commit "bueno" (donde el bug no existía) y un commit "malo" (donde
+sí existe), y Git te guiará para encontrar al culpable.
+
+| Command                | Description                                                                                      |
+|------------------------|--------------------------------------------------------------------------------------------------|
+| `git bisect start`     | Inicia el proceso de `bisect`.                                                                   |
+| `git bisect bad`       | Marca el commit actual como "malo" (contiene el bug).                                            |
+| `git bisect good`      | Marca el commit actual como "bueno" (no contiene el bug).                                        |
+| `git bisect reset`     | Termina la sesión de `bisect` y devuelve el `HEAD` a su estado original.                         |
+| `git bisect visualize` | Muestra los commits restantes a revisar en `gitk` o una herramienta similar.                     |
+| `git bisect log`       | Muestra un registro de los pasos tomados durante la sesión de `bisect` actual.                   |
+
 ---
 
-# Questions and research
+# Remember me
 
 > [!IMPORTANT]
 > No te quedes solo con esta informacion, investiga a profundidad
 > por tu cuenta.
 
-> [!CAUTION]
+> [!NOTE]
 > - Usa GitHub, es el programa mas usado para alojar tus
 >   repositorios remotos.
 > - Practica y prueba los siguiente comandos para analizar su
