@@ -1,3 +1,41 @@
+*   [1. Git Fundamentals](#1-git-fundamentals)
+    *   [1.1. Los tres estados de Git](#11-los-tres-estados-de-git)
+    *   [1.2. Las Tres Secciones Principales](#12-las-tres-secciones-principales)
+        *   [1.2.1. Relación entre los tres estados y secciones de Git](#121-relacion-entre-los-tres-estados-y-secciones-de-git)
+    *   [1.3. Configurando Git por primera vez](#13-configurando-git-por-primera-vez)
+    *   [1.4. Creando y Obteniendo Repositorios](#14-creando-y-obteniendo-repositorios)
+        *   [1.4.1. Inicializando un repositorio en un directorio existente](#141-inicializando-un-repositorio-en-un-directorio-existente)
+        *   [1.4.2. Clonando un repositorio existente](#142-clonando-un-repositorio-existente)
+    *   [1.5. Flujo de trabajo básico (Basic Workflow)](#15-flujo-de-trabajo-básico-basic-workflow)
+        *   [1.5.1. Revisando el Estado de tus archivos](#151-revisando-el-estado-de-tus-archivos)
+        *   [1.5.2. Ignorar archivos: el archivo `.gitignore`](#152-ignorar-archivos-el-archivo-gitignore)
+        *   [1.5.3. Ver los cambios (Staged y Unstaged)](#153-ver-los-cambios-staged-y-unstaged)
+        *   [1.5.4. Añadir cambios al Staging Area](#154-añadir-cambios-al-staging-area)
+        *   [1.5.5. Confirmando cambios (Commit)](#155-confirmando-cambios-commit)
+        *   [1.5.6. Eliminar archivos](#156-eliminar-archivos)
+    *   [1.6. Ver el historial de commits](#16-ver-el-historial-de-commits)
+        *   [1.6.1. Limitar la salida del Historial](#161-limitar-la-salida-del-historial)
+    *   [1.7. Deshacer cosas](#17-deshacer-cosas)
+        *   [1.7.1. Deshacer un archivo preparado](#171-deshacer-un-archivo-preparado)
+        *   [1.7.2. Deshacer un archivo modificado](#172-deshacer-un-archivo-modificado)
+        *   [1.7.3. Deshacer commits: Los 3 árboles](#173-deshacer-commits-los-3-árboles)
+    *   [1.8. Ramas (Branching): El superpoder de Git](#18-ramas-branching-el-superpoder-de-git)
+        *   [1.8.1. Creación, listado y cambio de ramas](#181-creación-listado-y-cambio-de-ramas)
+        *   [1.8.2. Fusión de ramas (Merging)](#182-fusión-de-ramas-merging)
+    *   [1.9. Reorganizando el trabajo](#19-reorganizando-el-trabajo)
+        *   [1.9.1. Rebase: La alternativa a la fusión](#191-rebase-la-alternativa-a-la-fusión)
+        *   [1.9.2. Rebase Interactivo](#192-rebase-interactivo)
+        *   [1.9.3. Rebase Avanzado](#193-rebase-avanzado)
+        *   [1.9.4. Cherry-pick](#194-cherry-pick)
+    *   [1.10. Guardado temporal de cambios (Stashing)](#110-guardado-temporal-de-cambios-stashing)
+    *   [1.11. Trabajar con remotos](#111-trabajar-con-remotos)
+        *   [1.11.1. Añadir repositorios remotos](#1111-añadir-repositorios-remotos)
+        *   [1.11.2. Traer, combinar y enviar a remotos](#1112-traer-combinar-y-enviar-a-remotos)
+        *   [1.11.4. Inspeccionar y gestionar remotos](#1114-inspeccionar-y-gestionar-remotos)
+    *   [1.12. Etiquetado (Tagging)](#112-etiquetado-tagging)
+
+---
+
 # 1. Git Fundamentals
 
 Git es un sistema de control de versiones distribuido que permite
@@ -5,8 +43,9 @@ rastrear y gestionar cambios en el código fuente durante el
 desarrollo de software.
 
 > No uses Git con interfaces graficas de usuario (GUI), úsalo por
-consola (CLI)
-> <samp> ~ Paz Valderrama</samp>
+> consola (CLI)
+>
+> <samp>~ Paz Valderrama</samp>
 
 ## 1.1. Los tres estados de Git
 
