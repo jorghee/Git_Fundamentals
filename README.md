@@ -128,6 +128,13 @@ Antes de empezar a usar Git, debes configurar tu identidad.
     git config --global core.editor nvim
     ~~~
 
+-   Modifa el nombre de la rama por defecto que se usa para
+    inicializar nuevos repositorios Git.
+
+    ~~~
+    git config --global init.defaultbranch main
+    ~~~
+
 -   Muestra todas las propiedades que Git ha configurado.
 
     ~~~
